@@ -5,7 +5,7 @@
 //  Created by Ouimin Lee on 9/25/24.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model
@@ -34,6 +34,17 @@ class Book {
         self.summary = summary
         self.rating = rating
         self.status = status
+    }
+    
+    var icon: Image {
+        switch status {
+        case .onShelf:
+            Image(systemName: "checkmark.diamond.fill")
+        case .inProgress:
+            Image(systemName: "book.fill")
+        case .completed:
+            Image(systemName: "books.vertical.fill")
+        }
     }
 }
 
