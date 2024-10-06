@@ -13,6 +13,7 @@ class Book {
     var title: String
     var author: String
     var dateAdded: Date
+    var dateStarted: Date
     var dateCompleted: Date
     var summary: String
     var rating: Int?
@@ -22,6 +23,7 @@ class Book {
         title: String,
         author: String,
         dateAdded: Date = Date.now,
+        dateStarted: Date = Date.distantPast,
         dateCompleted: Date = Date.distantPast,
         summary: String = ""  ,
         rating: Int? = nil,
@@ -30,6 +32,7 @@ class Book {
         self.title = title
         self.author = author
         self.dateAdded = dateAdded
+        self.dateStarted = dateStarted
         self.dateCompleted = dateCompleted
         self.summary = summary
         self.rating = rating

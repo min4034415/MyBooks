@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct EditBookView: View {
-//    let book: Book
+    @Environment(\.dismiss) private var dismiss
+        let book: Book
     @State private var status = Status.onShelf
     @State private var rating: Int?
     @State private var title = ""
@@ -17,6 +18,7 @@ struct EditBookView: View {
     @State private var dateAdded = Date.distantPast
     @State private var dateStarted = Date.distantPast
     @State private var dateCompleted = Date.distantPast
+    @State private var firstView = true
     
     var body: some View {
         HStack{
@@ -54,25 +56,88 @@ struct EditBookView: View {
             .foregroundStyle(.secondary)
             .onChange(of: status) {
                 oldValue, newValue in
-                if newValue == .onShelf {
-                    dateStarted = Date.distantPast
-                    dateCompleted = Date.distantPast
-                } else if newValue == .inProgress && oldValue == .completed {
-                    dateCompleted = Date.now
-                } else if newValue == .completed && oldValue == .onShelf {
-                    dateCompleted = Date.now
-                    dateStarted = dateAdded
-                }
-                else {
-                    dateCompleted = Date.now
+                if !firstView {
+                    if newValue == .onShelf {
+                        dateStarted = Date.distantPast
+                        dateCompleted = Date.distantPast
+                    } else if newValue == .inProgress && oldValue == .completed {
+                        dateCompleted = Date.now
+                    } else if newValue == .completed && oldValue == .onShelf {
+                        dateCompleted = Date.now
+                        dateStarted = dateAdded
+                    }
+                    else {
+                        dateCompleted = Date.now
+                    }
+                    firstView = false
                 }
             }
             Divider()
+            LabeledContent {
+                RatingsView(maxRating: 5, currentRating: $rating, width: 30)
+            } label: {
+                Text("Rating")
+            }
+            LabeledContent {
+                TextField("", text: $title)
+            } label: {
+                Text("Title").foregroundStyle(.secondary)
+            }
+            LabeledContent {
+                TextField("", text: $author)
+            } label: {
+                Text("Author").foregroundStyle(.secondary)
+            }
+            Divider()
+            Text("Summary").foregroundStyle(.secondary)
+            TextEditor(text: $summary)
+                .padding(5)
+                .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(Color(uiColor: .tertiarySystemFill), lineWidth: 2))
         }
         )
+        .padding()
+        .textFieldStyle(.roundedBorder)
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if changed {
+                Button("Update") {
+                    status = book.status
+                    rating = book.rating
+                    title = book.author
+                    summary = book.summary
+                    dateAdded = book.dateAdded
+                    dateStarted = book.dateStarted
+                    dateCompleted = book.dateCompleted
+                    dismiss()
+                }
+                .buttonStyle(.borderedProminent)
+            }
+        }
+        .onAppear {
+            status = book.status 
+            rating = book.rating 
+            title = book.author 
+            summary = book.summary 
+            dateAdded = book.dateAdded 
+            dateStarted = book.dateStarted 
+            dateCompleted = book.dateCompleted 
+        }
+    }
+    
+    var changed: Bool {
+        status != book.status
+        || rating != book.rating
+        || title != book.author
+        || summary != book.summary
+        || dateAdded != book.dateAdded
+        || dateStarted != book.dateStarted
+        || dateCompleted != book.dateCompleted
     }
 }
 
-#Preview {
-    EditBookView()
-}
+//#Preview {
+//    NavigationStack {
+//        EditBookView()
+//    }
+//}
