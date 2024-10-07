@@ -12,15 +12,20 @@ struct BookList: View {
     
     @Environment(\.modelContext) private var context
     @Query private var books: [Book]
-    init(sortOrder:  SortOrder) {
+    init(sortOrder:  SortOrder, filterString: String) {
         let sortDescriptors: [SortDescriptor<Book>] = switch sortOrder {
         case .status:
             [SortDescriptor(\Book.status), SortDescriptor(\Book.title)]
         case .title:
-            [SortDescriptor(\Book.status), SortDescriptor(\Book.title)]
+            [SortDescriptor(\Book.title)]
         case .author:
-            [SortDescriptor(\Book.status), SortDescriptor(\Book.title)]
+            [SortDescriptor(\Book.author)]
         }
+        let predicate = #Predicate<Book> { book in book.title.localizedStandardContains(filterString)
+            || book.author.localizedStandardContains(filterString)
+            || filterString.isEmpty
+        }
+        _books = Query(filter: predicate, sort: sortDescriptors)
     }
     var body: some View {
         Group{
@@ -70,7 +75,7 @@ struct BookList: View {
     let preview = Preview(Book.self)
     preview.addExamples(Book.sampleBooks)
     return NavigationStack{
-        BookList()
+        BookList(sortOrder: .status, filterString: "")
     }
         .modelContainer(preview.container)
 }

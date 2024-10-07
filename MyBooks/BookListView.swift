@@ -17,10 +17,11 @@ enum SortOrder: String, Identifiable, CaseIterable {
 }
 
 struct BookListView: View {
-    @Environment(\.modelContext) private var context
-    @Query(sort: \Book.status) private var books: [Book]
+//    @Environment(\.modelContext) private var context
+//    @Query(sort: \Book.status) private var books: [Book]
     @State private var createNewBook = false
     @State private var sortOrder = SortOrder.status
+    @State private var filter = ""
     var body: some View {
         NavigationStack {
             Picker("", selection: $sortOrder) {
@@ -31,7 +32,8 @@ struct BookListView: View {
             }
             .buttonStyle(.bordered)
             .navigationTitle("My Books")
-            BookList()
+            BookList(sortOrder: sortOrder, filterString: filter)
+                .searchable(text: $filter, prompt: Text("Filter on title or author"))
             .toolbar {
                 Button {
                     createNewBook = true
