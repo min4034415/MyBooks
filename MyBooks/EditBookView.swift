@@ -102,21 +102,21 @@ struct EditBookView: View {
         .toolbar {
             if changed {
                 Button("Update") {
-                    status = book.status
-                    rating = book.rating
-                    title = book.author
-                    summary = book.summary
-                    dateAdded = book.dateAdded
-                    dateStarted = book.dateStarted
-                    dateCompleted = book.dateCompleted
+                    book.status = status.rawValue
+                    book.rating = rating
+                    book.author = title
+                    book.summary = summary
+                    book.dateAdded = dateAdded
+                    book.dateStarted = dateStarted
+                    book.dateCompleted = dateCompleted
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)
             }
         }
         .onAppear {
-            status = book.status 
-            rating = book.rating 
+            status = Status(rawValue: book.status)!
+            rating = book.rating
             title = book.author 
             summary = book.summary 
             dateAdded = book.dateAdded 
@@ -126,7 +126,7 @@ struct EditBookView: View {
     }
     
     var changed: Bool {
-        status != book.status
+        status != Status(rawValue: book.status)!
         || rating != book.rating
         || title != book.author
         || summary != book.summary
@@ -136,8 +136,11 @@ struct EditBookView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        EditBookView()
-//    }
-//}
+#Preview {
+    let preview = Preview(Book.self)
+    
+    return NavigationStack {
+        EditBookView(book: Book.sampleBooks[4])
+            .modelContainer(preview.container)
+    }
+}
