@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D65CA1212CB6664300715224 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CA11F2CB6664300715224 /* Quote.swift */; };
+		D65CA1222CB6664300715224 /* QuotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CA1202CB6664300715224 /* QuotesListView.swift */; };
 		D68061C62CABCE7600AB5C1C /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68061C52CABCE7600AB5C1C /* RatingsView.swift */; };
 		D6B0FB932CB2B71B000CA356 /* BookSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0FB922CB2B71B000CA356 /* BookSamples.swift */; };
 		D6B0FB952CB2B94A000CA356 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B0FB942CB2B94A000CA356 /* PreviewContainer.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D65CA11F2CB6664300715224 /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		D65CA1202CB6664300715224 /* QuotesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotesListView.swift; sourceTree = "<group>"; };
 		D68061C52CABCE7600AB5C1C /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
 		D6B0FB922CB2B71B000CA356 /* BookSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSamples.swift; sourceTree = "<group>"; };
 		D6B0FB942CB2B94A000CA356 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 		D6E01E612CA44E5B0067EB90 /* MyBooks */ = {
 			isa = PBXGroup;
 			children = (
+				D65CA11F2CB6664300715224 /* Quote.swift */,
+				D65CA1202CB6664300715224 /* QuotesListView.swift */,
 				D6E01E622CA44E5B0067EB90 /* MyBooksApp.swift */,
 				D6FB53A72CAA437C009FF371 /* EditBookView.swift */,
 				D6E01E642CA44E5B0067EB90 /* BookListView.swift */,
@@ -166,7 +172,9 @@
 				D6E01E652CA44E5B0067EB90 /* BookListView.swift in Sources */,
 				D6E01E632CA44E5B0067EB90 /* MyBooksApp.swift in Sources */,
 				D6B0FB952CB2B94A000CA356 /* PreviewContainer.swift in Sources */,
+				D65CA1212CB6664300715224 /* Quote.swift in Sources */,
 				D6E01E712CA44E6E0067EB90 /* Book.swift in Sources */,
+				D65CA1222CB6664300715224 /* QuotesListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
