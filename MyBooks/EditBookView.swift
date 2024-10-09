@@ -14,7 +14,7 @@ struct EditBookView: View {
     @State private var rating: Int?
     @State private var title = ""
     @State private var author = ""
-    @State private var summary = ""
+    @State private var synopsis = ""
     @State private var dateAdded = Date.distantPast
     @State private var dateStarted = Date.distantPast
     @State private var dateCompleted = Date.distantPast
@@ -89,8 +89,8 @@ struct EditBookView: View {
                 Text("Author").foregroundStyle(.secondary)
             }
             Divider()
-            Text("Summary").foregroundStyle(.secondary)
-            TextEditor(text: $summary)
+            Text("synopsis").foregroundStyle(.secondary)
+            TextEditor(text: $synopsis)
                 .padding(5)
                 .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(Color(uiColor: .tertiarySystemFill), lineWidth: 2))
         }
@@ -105,7 +105,7 @@ struct EditBookView: View {
                     book.status = status.rawValue
                     book.rating = rating
                     book.author = title
-                    book.summary = summary
+                    book.synopsis = synopsis
                     book.dateAdded = dateAdded
                     book.dateStarted = dateStarted
                     book.dateCompleted = dateCompleted
@@ -118,7 +118,7 @@ struct EditBookView: View {
             status = Status(rawValue: book.status)!
             rating = book.rating
             title = book.author 
-            summary = book.summary 
+            synopsis = book.synopsis 
             dateAdded = book.dateAdded 
             dateStarted = book.dateStarted 
             dateCompleted = book.dateCompleted 
@@ -129,7 +129,7 @@ struct EditBookView: View {
         status != Status(rawValue: book.status)!
         || rating != book.rating
         || title != book.author
-        || summary != book.summary
+        || synopsis != book.synopsis
         || dateAdded != book.dateAdded
         || dateStarted != book.dateStarted
         || dateCompleted != book.dateCompleted

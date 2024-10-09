@@ -15,8 +15,8 @@ struct MyBooksApp: App {
         WindowGroup {
             BookListView()
         }
-        .modelContainer(for: Book.self)
-//        .modelContainer(container)
+//        .modelContainer(for: Book.self)
+        .modelContainer(container)
     }
     
     
